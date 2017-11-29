@@ -11,14 +11,21 @@
   "devDependencies": {
     "browser-sync": "^2.18.13",
     "css-mqpacker": "^6.0.1",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-csso": "^3.0.0",
+    "gulp-imagemin": "^4.0.0",
     "gulp-less": "^3.3.2",
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^7.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
-    "postcss": "^6.0.14"
+    "gulp-svgmin": "^1.2.4",
+    "gulp-svgstore": "^6.1.0",
+    "gulp-uglify": "^3.0.0",
+    "postcss": "^6.0.14",
+    "pump": "^1.0.3",
+    "run-sequence": "^2.2.0"
   }
 }
