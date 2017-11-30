@@ -111,19 +111,19 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('watch-sass', ['browser-sync', 'sass'], function() {
-  gulp.watch('sass/*.sass', ['sass']);
+  gulp.watch('sass/**/*.sass', ['sass']);
   gulp.watch('./*.html', browserSync.reload);
   gulp.watch('./js/**/*.js', browserSync.reload);
 });
 
 gulp.task('watch-scss', ['browser-sync', 'scss'], function() {
-  gulp.watch('scss/*.scss', ['scss']);
+  gulp.watch('scss/**/*.scss', ['scss']);
   gulp.watch('./*.html', browserSync.reload);
   gulp.watch('./js/**/*.js', browserSync.reload);
 });
 
 gulp.task('watch-less', ['browser-sync', 'less'], function() {
-  gulp.watch('less/*.less', ['less']);
+  gulp.watch('less/**/*.less', ['less']);
   gulp.watch('./*.html', browserSync.reload);
   gulp.watch('./js/**/*.js', browserSync.reload);
 });
