@@ -1,6 +1,11 @@
+@media (max-width: 100px) {
+    body {
+        background-color: gray;
+    }
+}
+
 body {
     background-color: green;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.5);
     box-shadow: rgba(0, 0, 0, 0.5);
 }
 
@@ -8,10 +13,4 @@ body {
     color: #fff;
 }
 
-@media (max-width: 100px) {
-    body {
-        background-color: gray;
-    }
-}
-
-/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNhc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBSUE7RUFDRSx3QkFBdUI7RUFDdkIsdUNBQXFCO1VBQXJCLCtCQUFxQixFQUFPOztBQUU5QjtFQUNFLFlBQVcsRUFBSTs7QUFUakI7RUFDRTtJQUNFLHVCQUFzQixFQUFJLEVBQUEiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQG1lZGlhIChtYXgtd2lkdGg6IDEwMHB4KSB7XG4gIGJvZHkge1xuICAgIGJhY2tncm91bmQtY29sb3I6IGdyYXk7IH0gfVxuXG5ib2R5IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogZ3JlZW47XG4gIGJveC1zaGFkb3c6IHJnYmEoIzAwMCwuNSk7IH1cblxuLmV2ZW50IHtcbiAgY29sb3I6ICNmZmY7IH1cbiJdfQ== */
+/*# sourceMappingURL=style.css.map */
