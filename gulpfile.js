@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     mqpacker = require('css-mqpacker'),
     minify = require('gulp-clean-css'),
+    uncss = require('gulp-uncss'),
     sourcemaps = require('gulp-sourcemaps'),
     rename = require('gulp-rename'),
     beautify = require('gulp-cssbeautify'),
@@ -110,8 +111,8 @@ gulp.task('copy', function() {
   return gulp.src([
       'fonts/**',
       'img/**',
-      'js/**',
-      'css/**',
+      'js/**/*.js',
+      'css/**/*.css',
       '*.html'
     ], {
       base: "."
@@ -126,6 +127,9 @@ gulp.task('css', function() {
         sort: true
       })
     ]))
+    .pipe(uncss({
+            html: ['build/*.html']
+    }))
     .pipe(autoprefixer({
       browsers: [
         'last 3 versions'
@@ -133,9 +137,7 @@ gulp.task('css', function() {
     }))
     .pipe(gulp.dest('build/css'))
     .pipe(minify())
-    .pipe(rename(function(path) {
-      path.extname = '.min.css'
-    }))
+    .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('build/css'))
 });
 
@@ -143,6 +145,7 @@ gulp.task('scripts', function(cb) {
   pump([
       gulp.src('build/js/**/*.js'),
       uglify(),
+      rename({suffix: '.min'}),
       gulp.dest('build/js')
     ],
     cb
@@ -150,14 +153,14 @@ gulp.task('scripts', function(cb) {
 });
 
 gulp.task('images', function() {
-  return gulp.src('build/img/**/*.{png,jpg,gif}')
+  return gulp.src('build/img/**/*.{png,PNG,jpeg,jpg,JPG,gif,GIF}')
     .pipe(imagemin([
       imagemin.optipng({
         optimizationLevel: 3
       }),
       imagemin.jpegtran({
         progressive: true
-      }),
+      })
     ]))
     .pipe(gulp.dest('build/img'));
 });

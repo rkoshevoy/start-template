@@ -27,6 +27,7 @@
     "gulp-svgmin": "^1.2.4",
     "gulp-svgstore": "^6.1.0",
     "gulp-uglify": "^3.0.0",
+    "gulp-uncss": "^1.0.6",
     "postcss": "^6.0.14",
     "pump": "^1.0.3",
     "run-sequence": "^2.2.0"
