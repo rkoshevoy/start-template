@@ -1,5 +1,7 @@
 // unnecessary need to remove
 
+// npm i gulp gulp-sass gulp-less gulp-plumber gulp-postcss gulp-autoprefixer css-mqpacker gulp-clean-css gulp-uncss gulp-sourcemaps gulp-rename gulp-cssbeautify browser-sync gulp-imagemin gulp-svgstore gulp-svgmin del gulp-uglify pump
+
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     less = require('gulp-less'),
@@ -16,7 +18,6 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     svgstore = require('gulp-svgstore'),
     svgmin = require('gulp-svgmin'),
-    run = require('run-sequence'),
     del = require('del'),
     uglify = require('gulp-uglify'),
     pump = require('pump');
@@ -79,29 +80,29 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('watch-sass', ['browser-sync', 'sass'], function() {
-  gulp.watch('sass/**/*.sass', ['sass']);
-  gulp.watch('./*.html', browserSync.reload);
-  gulp.watch('./js/**/*.js', browserSync.reload);
-});
+gulp.task('watch-sass', gulp.parallel('browser-sync', 'sass', function() {
+  gulp.watch('sass/**/*.sass').on('change', gulp.series('sass'));
+  gulp.watch('./*.html').on('change', gulp.series(browserSync.reload));
+  gulp.watch('./js/**/*.js').on('change', gulp.series(browserSync.reload));
+}));
 
-gulp.task('watch-scss', ['browser-sync', 'scss'], function() {
-  gulp.watch('scss/**/*.scss', ['scss']);
-  gulp.watch('./*.html', browserSync.reload);
-  gulp.watch('./js/**/*.js', browserSync.reload);
-});
+gulp.task('watch-scss', gulp.parallel('browser-sync', 'scss', function() {
+  gulp.watch('scss/**/*.scss').on('change', gulp.series('scss'));
+  gulp.watch('./*.html').on('change', gulp.series(browserSync.reload));
+  gulp.watch('./js/**/*.js').on('change', gulp.series(browserSync.reload));
+}));
 
-gulp.task('watch-less', ['browser-sync', 'less'], function() {
-  gulp.watch('less/**/*.less', ['less']);
-  gulp.watch('./*.html', browserSync.reload);
-  gulp.watch('./js/**/*.js', browserSync.reload);
-});
+gulp.task('watch-less', gulp.parallel('browser-sync', 'less', function() {
+  gulp.watch('less/**/*.less').on('change', gulp.series('less'));
+  gulp.watch('./*.html').on('change', gulp.series(browserSync.reload));
+  gulp.watch('./js/**/*.js').on('change', gulp.series(browserSync.reload));
+}));
 
-gulp.task('watch-css', ['browser-sync', 'css'], function() {
-  gulp.watch('css/**/*.css', ['css']);
-  gulp.watch('./*.html', browserSync.reload);
-  gulp.watch('./js/**/*.js', browserSync.reload);
-});
+gulp.task('watch-css', gulp.parallel('browser-sync', 'pure-css', function() {
+  gulp.watch('css/**/*.css').on('change', gulp.series('pure-css'));
+  gulp.watch('./*.html').on('change', gulp.series(browserSync.reload));
+  gulp.watch('./js/**/*.js').on('change', gulp.series(browserSync.reload));
+}));
 
 gulp.task('clean', function() {
   return del('build');
@@ -175,53 +176,10 @@ gulp.task('symbols', function() {
     .pipe(gulp.dest('build/img'));
 });
 
-gulp.task('build-sass', function(fn) {
-  run(
-    'sass',
-    'clean',
-    'copy',
-    'css',
-    'scripts',
-    'images',
-    'symbols',
-    fn
-  );
-});
+gulp.task('build-sass', gulp.series('sass', 'clean', 'copy', 'css', 'scripts', 'images', 'symbols'));
 
-gulp.task('build-scss', function(fn) {
-  run(
-    'scss',
-    'clean',
-    'copy',
-    'css',
-    'scripts',
-    'images',
-    'symbols',
-    fn
-  );
-});
+gulp.task('build-scss', gulp.series('scss', 'clean', 'copy', 'css', 'scripts', 'images', 'symbols'));
 
-gulp.task('build-less', function(fn) {
-  run(
-    'less',
-    'clean',
-    'copy',
-    'css',
-    'scripts',
-    'images',
-    'symbols',
-    fn
-  );
-});
+gulp.task('build-less', gulp.series('less', 'clean', 'copy', 'css', 'scripts', 'images', 'symbols'));
 
-gulp.task('build-css', function(fn) {
-  run(
-    'clean',
-    'copy',
-    'css',
-    'scripts',
-    'images',
-    'symbols',
-    fn
-  );
-});
+gulp.task('build-css', gulp.series('clean', 'copy', 'css', 'scripts', 'images', 'symbols'));
